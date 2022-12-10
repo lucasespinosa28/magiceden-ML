@@ -1,0 +1,226 @@
+﻿{
+  "TrainingTime": 60,
+  "Scenario": "Regression",
+  "DataSource": {
+    "Type": "TabularFile",
+    "Version": 1,
+    "FilePath": "C:\\temp\\y00tsListings_v25.csv",
+    "Delimiter": ",",
+    "DecimalMarker": ".",
+    "HasHeader": true,
+    "ColumnProperties": [
+      {
+        "ColumnName": "Price",
+        "ColumnPurpose": "Label",
+        "ColumnDataFormat": "Single",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 2
+      },
+      {
+        "ColumnName": "Background",
+        "ColumnPurpose": "Feature",
+        "ColumnDataFormat": "String",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 2
+      },
+      {
+        "ColumnName": "Fur",
+        "ColumnPurpose": "Feature",
+        "ColumnDataFormat": "String",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 2
+      },
+      {
+        "ColumnName": "Face",
+        "ColumnPurpose": "Feature",
+        "ColumnDataFormat": "String",
+        "IsCategorical": true,
+        "Type": "Column",
+        "Version": 2
+      },
+      {
+        "ColumnName": "Clothes",
+        "ColumnPurpose": "Feature",
+        "ColumnDataFormat": "String",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 2
+      },
+      {
+        "ColumnName": "Eyewear",
+        "ColumnPurpose": "Feature",
+        "ColumnDataFormat": "String",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 2
+      },
+      {
+        "ColumnName": "Head",
+        "ColumnPurpose": "Feature",
+        "ColumnDataFormat": "String",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 2
+      },
+      {
+        "ColumnName": "Unique",
+        "ColumnPurpose": "Feature",
+        "ColumnDataFormat": "Boolean",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 2
+      },
+      {
+        "ColumnName": "DateTime",
+        "ColumnPurpose": "Feature",
+        "ColumnDataFormat": "DateTime",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 2
+      }
+    ]
+  },
+  "Environment": {
+    "Type": "LocalCPU",
+    "Version": 1
+  },
+  "RunHistory": {
+    "Version": 1,
+    "Type": "Result",
+    "Trials": [
+      {
+        "Version": 0,
+        "Type": "Trial",
+        "TrainerName": "FastTreeTweedieRegression",
+        "Score": 0.906342613770222,
+        "RuntimeInSeconds": 1.318
+      },
+      {
+        "Version": 0,
+        "Type": "Trial",
+        "TrainerName": "SdcaRegression",
+        "Score": 0.81063119890716484,
+        "RuntimeInSeconds": 0.517
+      },
+      {
+        "Version": 0,
+        "Type": "Trial",
+        "TrainerName": "SdcaRegression",
+        "Score": 0.76370865896605966,
+        "RuntimeInSeconds": 0.447
+      },
+      {
+        "Version": 0,
+        "Type": "Trial",
+        "TrainerName": "LightGbmRegression",
+        "Score": 0.73748490411347212,
+        "RuntimeInSeconds": 0.355
+      },
+      {
+        "Version": 0,
+        "Type": "Trial",
+        "TrainerName": "FastForestRegression",
+        "Score": 0.67732705553175643,
+        "RuntimeInSeconds": 0.733
+      }
+    ],
+    "Pipeline": {
+      "parameter": {
+        "0": {
+          "OutputColumnNames": [
+            "Face"
+          ],
+          "InputColumnNames": [
+            "Face"
+          ]
+        },
+        "1": {
+          "OutputColumnNames": [
+            "Unique"
+          ],
+          "InputColumnNames": [
+            "Unique"
+          ]
+        },
+        "10": {
+          "NumberOfLeaves": 83,
+          "MinimumExampleCountPerLeaf": 4,
+          "NumberOfTrees": 28,
+          "MaximumBinCountPerFeature": 69,
+          "FeatureFraction": 0.99999999,
+          "LearningRate": 0.99999977667298645,
+          "LabelColumnName": "Price",
+          "FeatureColumnName": "Features"
+        },
+        "2": {
+          "InputColumnName": "Background",
+          "OutputColumnName": "Background"
+        },
+        "3": {
+          "InputColumnName": "Fur",
+          "OutputColumnName": "Fur"
+        },
+        "4": {
+          "InputColumnName": "Clothes",
+          "OutputColumnName": "Clothes"
+        },
+        "5": {
+          "InputColumnName": "Eyewear",
+          "OutputColumnName": "Eyewear"
+        },
+        "6": {
+          "InputColumnName": "Head",
+          "OutputColumnName": "Head"
+        },
+        "7": {
+          "OutputColumnNames": [
+            "DateTime"
+          ],
+          "InputColumnNames": [
+            "DateTime"
+          ]
+        },
+        "8": {
+          "InputColumnNames": [
+            "Face",
+            "Unique",
+            "Background",
+            "Fur",
+            "Clothes",
+            "Eyewear",
+            "Head",
+            "DateTime"
+          ],
+          "OutputColumnName": "Features"
+        },
+        "9": {
+          "OutputColumnNames": [
+            "Features"
+          ],
+          "InputColumnNames": [
+            "Features"
+          ]
+        }
+      },
+      "estimators": [
+        "OneHotEncoding",
+        "ConvertType",
+        "FeaturizeText",
+        "FeaturizeText",
+        "FeaturizeText",
+        "FeaturizeText",
+        "FeaturizeText",
+        "ConvertType",
+        "Concatenate",
+        "NormalizeMinMax",
+        "FastTreeTweedieRegression"
+      ]
+    },
+    "MetricName": "RSquared"
+  },
+  "Type": "TrainingConfig",
+  "Version": 2
+}
